@@ -1,0 +1,18 @@
+---
+import { getEntry, render } from 'astro:content';
+import MarkdownPage from '../layouts/MarkdownPage.astro';
+
+// Page historique conservée pour ne pas casser les URLs indexées.
+const page = await getEntry('pages', 'un-webmaster-dedie-corps-et-ame-a-votre-projet');
+if (!page) throw new Error('Contenu manquant : src/content/pages/un-webmaster-....md');
+const { Content } = await render(page);
+---
+
+<MarkdownPage
+  title={page.data.title}
+  description={page.data.description}
+  updatedDate={page.data.updatedDate}
+  eyebrow="Notre approche"
+>
+  <Content />
+</MarkdownPage>

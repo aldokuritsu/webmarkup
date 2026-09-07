@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import PageHero from '../components/PageHero.astro';
+---
+
+<BaseLayout
+  title="A propos"
+  description="Webmark'up, agence de webmarketing à Rouen : une équipe d'experts passionnés en création de sites web, SEO, SEA, gestion quotidienne et maintenance technique."
+>
+  <PageHero
+    eyebrow="A propos"
+    title="Une équipe d'experts passionnés du webmarketing"
+    lead="Nous sommes fiers de notre savoir-faire et de notre capacité à aider les entreprises à atteindre leurs objectifs en ligne."
+  />
+
+  <section class="container-page py-16 sm:py-20">
+    <div class="max-w-3xl space-y-5 text-lg leading-relaxed text-ink-800/85">
+      <p>
+        Notre équipe de Webmark'up est composée d'experts passionnés et expérimentés dans le domaine
+        du webmarketing. Nous sommes fiers de notre savoir-faire et de notre capacité à aider les
+        entreprises à atteindre leurs objectifs en ligne.
+      </p>
+      <p>
+        Nous avons une grande expérience dans la création de sites web, la gestion quotidienne, le
+        SEO, le SEA et la maintenance technique. Nous avons travaillé avec des entreprises de toutes
+        tailles et de tous secteurs d'activité. Nous avons un savoir-faire en matière de génération
+        de leads automatique et auto-géré.
+      </p>
+      <p>
+        Notre engagement envers la qualité et la satisfaction de nos clients est ce qui nous
+        distingue de nos concurrents. Nous sommes toujours à l'écoute de vos besoins et nous mettons
+        tout en œuvre pour vous offrir les meilleurs résultats possibles.
+      </p>
+      <p>
+        N'hésitez pas à <a class="font-semibold text-brand-600 underline underline-offset-4 hover:text-brand-700" href="/nous-contacter/">nous contacter</a>
+        pour discuter de votre projet ou pour demander un devis. Nous serons ravis de vous aider à atteindre
+        vos objectifs en ligne avec Webmark'up.
+      </p>
+    </div>
+  </section>
+
+  <CtaBand />
+</BaseLayout>

@@ -1,0 +1,25 @@
+---
+import Button from './Button.astro';
+
+interface Props {
+  title?: string;
+  text?: string;
+  cta?: string;
+}
+
+const {
+  title = 'Ne perdez plus de temps à vous soucier de votre présence en ligne !',
+  text = "Faites confiance à notre équipe d'experts en webmarketing pour vous aider à atteindre vos objectifs en ligne. Demandez une étude dès maintenant, c'est gratuit et sans engagement !",
+  cta = 'Etudions ensemble votre projet (gratuit et sans engagement)',
+} = Astro.props;
+---
+
+<section class="bg-linear-to-r from-brand-700 to-brand-500">
+  <div class="container-page py-16 text-center sm:py-20">
+    <h2 class="mx-auto max-w-3xl text-2xl font-bold tracking-tight text-white text-balance sm:text-3xl">
+      {title}
+    </h2>
+    <p class="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-brand-50">{text}</p>
+    <Button href="/nous-contacter/" variant="secondary" size="lg" class="mt-8">{cta}</Button>
+  </div>
+</section>

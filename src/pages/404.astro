@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/Button.astro';
+import PageHero from '../components/PageHero.astro';
+---
+
+<BaseLayout title="Page introuvable" description="Cette page n'existe pas ou a été déplacée." noindex>
+  <PageHero
+    eyebrow="Erreur 404"
+    title="Cette page n'existe pas (ou plus)"
+    lead="Le contenu que vous cherchez a peut-être été déplacé lors de la refonte du site."
+  />
+  <section class="container-page py-16 sm:py-20">
+    <div class="flex flex-wrap gap-4">
+      <Button href="/">Retour à l'accueil</Button>
+      <Button href="/blog/" variant="secondary">Parcourir le blog</Button>
+      <Button href="/nous-contacter/" variant="secondary">Nous contacter</Button>
+    </div>
+  </section>
+</BaseLayout>

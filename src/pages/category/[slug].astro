@@ -1,0 +1,65 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import PostCard from '../../components/PostCard.astro';
+
+export async function getStaticPaths() {
+  const posts = (await getCollection('blog')).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+  );
+
+  const bySlug = new Map<string, { name: string; posts: CollectionEntry<'blog'>[] }>();
+  for (const post of posts) {
+    const { category, categorySlug } = post.data;
+    if (!category || !categorySlug) continue;
+    const bucket = bySlug.get(categorySlug) ?? { name: category, posts: [] };
+    bucket.posts.push(post);
+    bySlug.set(categorySlug, bucket);
+  }
+
+  return [...bySlug].map(([slug, { name, posts: categoryPosts }]) => ({
+    params: { slug },
+    props: { name, posts: categoryPosts },
+  }));
+}
+
+interface Props {
+  name: string;
+  posts: CollectionEntry<'blog'>[];
+}
+
+const { name, posts } = Astro.props;
+const count = posts.length;
+---
+
+<BaseLayout
+  title={`${name} — Blog`}
+  description={`Tous les articles de Webmark'up dans la catégorie ${name}.`}
+>
+  <PageHero
+    eyebrow="Catégorie"
+    title={name}
+    lead={`${count} article${count > 1 ? 's' : ''} dans cette catégorie.`}
+  />
+
+  <section class="container-page py-16 sm:py-20">
+    <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        posts.map((post) => (
+          <li>
+            <PostCard post={post} />
+          </li>
+        ))
+      }
+    </ul>
+    <p class="mt-12">
+      <a
+        href="/blog/"
+        class="font-semibold text-brand-600 underline underline-offset-4 transition hover:text-brand-700"
+      >
+        ← Retour au blog
+      </a>
+    </p>
+  </section>
+</BaseLayout>

@@ -1,0 +1,151 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import Icon from '../components/Icon.astro';
+import PostCard from '../components/PostCard.astro';
+import { SITE_TITLE, SITE_URL } from '../consts';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  const sorted = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+  return sorted.map((post) => ({
+    params: { slug: post.id },
+    props: {
+      post,
+      related: sorted
+        .filter(
+          (other) =>
+            other.id !== post.id &&
+            (!post.data.categorySlug || other.data.categorySlug === post.data.categorySlug),
+        )
+        .concat(sorted.filter((other) => other.id !== post.id))
+        .filter((other, index, all) => all.findIndex((o) => o.id === other.id) === index)
+        .slice(0, 3),
+    },
+  }));
+}
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+  related: CollectionEntry<'blog'>[];
+}
+
+const { post, related } = Astro.props;
+const { title, description, pubDate, updatedDate, category, categorySlug, heroImage, heroImageAlt } =
+  post.data;
+const { Content } = await render(post);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: title,
+  description,
+  datePublished: pubDate.toISOString(),
+  dateModified: (updatedDate ?? pubDate).toISOString(),
+  mainEntityOfPage: `${SITE_URL}/${post.id}/`,
+  author: { '@type': 'Organization', name: SITE_TITLE, url: SITE_URL },
+  publisher: { '@type': 'Organization', name: SITE_TITLE, url: SITE_URL },
+  ...(heroImage ? { image: new URL(heroImage.src, SITE_URL).href } : {}),
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  type="article"
+  publishedTime={pubDate}
+  modifiedTime={updatedDate ?? pubDate}
+>
+  <script slot="head" type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
+
+  <article>
+    <header class="bg-linear-to-br from-ink-950 via-ink-900 to-brand-900">
+      <div class="container-page py-16 sm:py-20">
+        <nav class="text-sm text-slate-400" aria-label="Fil d'Ariane">
+          <a class="transition hover:text-brand-400" href="/blog/">Blog</a>
+          {
+            category && categorySlug && (
+              <>
+                <span class="px-2">/</span>
+                <a class="transition hover:text-brand-400" href={`/category/${categorySlug}/`}>
+                  {category}
+                </a>
+              </>
+            )
+          }
+        </nav>
+        <h1 class="mt-4 max-w-4xl text-3xl font-bold tracking-tight text-white text-balance sm:text-4xl lg:text-5xl">
+          {title}
+        </h1>
+        <p class="mt-5 text-sm text-slate-400">
+          Publié le <FormattedDate date={pubDate} />
+          {
+            updatedDate && updatedDate.valueOf() !== pubDate.valueOf() && (
+              <>
+                {' — mis à jour le '}
+                <FormattedDate date={updatedDate} />
+              </>
+            )
+          }
+        </p>
+      </div>
+    </header>
+
+    {
+      heroImage && (
+        <div class="container-page -mt-8 sm:-mt-10">
+          <Image
+            src={heroImage}
+            alt={heroImageAlt ?? ''}
+            widths={[480, 800, 1200]}
+            sizes="(min-width: 1024px) 1024px, 100vw"
+            loading="eager"
+            class="aspect-16/7 w-full rounded-2xl object-cover shadow-xl shadow-ink-900/10"
+          />
+        </div>
+      )
+    }
+
+    <div class="container-page py-14 sm:py-16">
+      <div
+        class="prose prose-lg prose-slate mx-auto max-w-3xl prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-ink-900 prose-a:text-brand-600 prose-a:underline-offset-4 hover:prose-a:text-brand-700"
+      >
+        <Content />
+      </div>
+    </div>
+  </article>
+
+  {
+    related.length > 0 && (
+      <section class="border-t border-ink-900/8 bg-brand-50/50 py-16 sm:py-20">
+        <div class="container-page">
+          <div class="flex flex-wrap items-end justify-between gap-6">
+            <h2 class="text-2xl font-bold tracking-tight text-ink-900 sm:text-3xl">
+              À lire également
+            </h2>
+            <a
+              href="/blog/"
+              class="inline-flex items-center gap-2 text-sm font-semibold text-brand-600 transition hover:text-brand-700"
+            >
+              Tous les articles
+              <Icon name="arrow-right" class="size-4" />
+            </a>
+          </div>
+          <ul class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {related.map((item) => (
+              <li>
+                <PostCard post={item} />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    )
+  }
+
+  <CtaBand />
+</BaseLayout>

@@ -1,0 +1,76 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
+import PageHero from '../components/PageHero.astro';
+import { CONTACT } from '../consts';
+import { SERVICES } from '../data/services';
+---
+
+<BaseLayout
+  title="Une équipe de webmasters Rouennais prêts à vous aider dès demain !"
+  description="Création de site internet, gestion quotidienne, SEO, SEA, maintenance technique et surveillance : découvrez l'ensemble des services de l'agence Webmark'up à Rouen."
+>
+  <PageHero
+    eyebrow="Nos services"
+    title="Une équipe de webmasters Rouennais prêts à vous aider dès demain !"
+    lead="Nous sommes spécialisés dans la création de site internet, la gestion quotidienne, le SEO, le SEA et la maintenance technique."
+  />
+
+  <section class="container-page py-16 sm:py-20">
+    <div class="max-w-3xl space-y-5 text-lg leading-relaxed text-ink-800/85">
+      <p>
+        Bienvenue chez Webmark'up, votre agence de webmarketing basée à {CONTACT.city} en {
+          CONTACT.region
+        }. Nous sommes spécialisés dans la création de site internet, la gestion quotidienne, le SEO,
+        le SEA et la maintenance technique. Notre objectif est de vous aider à transformer votre site
+        web en une machine à générer des leads automatique et auto-géré.
+      </p>
+      <p>
+        Nous utilisons des stratégies de webmarketing avancées pour attirer les bons clients, les
+        convertir en leads qualifiés et les fidéliser.
+      </p>
+      <p>
+        Notre équipe expérimentée est là pour vous accompagner à chaque étape de votre projet, que ce
+        soit pour la création d'un site vitrine, d'un site e-commerce ou pour améliorer votre
+        présence en ligne avec des services de SEO et de SEA.
+      </p>
+      <p>
+        N'hésitez pas à <a class="font-semibold text-brand-600 underline underline-offset-4 hover:text-brand-700" href="/nous-contacter/">nous contacter</a>
+        pour discuter de votre projet ou pour demander un devis, nous serons ravis de vous aider à atteindre
+        vos objectifs de croissance grâce à un site internet performant.
+      </p>
+    </div>
+  </section>
+
+  <section class="border-t border-ink-900/8 bg-brand-50/50 py-16 sm:py-20">
+    <div class="container-page">
+      <h2 class="max-w-3xl text-2xl font-bold tracking-tight text-ink-900 text-balance sm:text-3xl">
+        Nous proposons tout un éventail de services pour vous aider dans votre quotidien
+      </h2>
+
+      <div class="mt-12 space-y-6">
+        {
+          SERVICES.map((service) => (
+            <article
+              id={service.id}
+              class="scroll-mt-24 rounded-2xl bg-white p-7 ring-1 ring-ink-900/8 sm:p-9"
+            >
+              <div class="flex flex-wrap items-center gap-4">
+                <span class="inline-flex size-12 items-center justify-center rounded-xl bg-brand-50 text-accent-500">
+                  <Icon name={service.icon} class="size-6" />
+                </span>
+                <h3 class="text-xl font-semibold text-ink-900">{service.title}</h3>
+              </div>
+              <p class="mt-5 leading-relaxed text-ink-800/85">
+                {service.description ?? service.summary}
+              </p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</BaseLayout>

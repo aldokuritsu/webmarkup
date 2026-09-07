@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Button from '../../components/Button.astro';
+import PageHero from '../../components/PageHero.astro';
+---
+
+<BaseLayout title="Message envoyé" description="Votre demande a bien été envoyée à Webmark'up." noindex>
+  <PageHero
+    eyebrow="Merci !"
+    title="Votre demande est bien arrivée"
+    lead="Nous revenons vers vous sous 24h avec une première analyse de votre projet."
+  />
+  <section class="container-page py-16 sm:py-20">
+    <div class="flex flex-wrap gap-4">
+      <Button href="/">Retour à l'accueil</Button>
+      <Button href="/blog/" variant="secondary">Lire notre blog</Button>
+    </div>
+  </section>
+</BaseLayout>

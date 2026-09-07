@@ -1,0 +1,54 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import PostCard from '../../components/PostCard.astro';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+const categories = [
+  ...new Map(
+    posts
+      .filter((post) => post.data.category && post.data.categorySlug)
+      .map((post) => [post.data.categorySlug!, post.data.category!]),
+  ),
+].sort((a, b) => a[1].localeCompare(b[1], 'fr'));
+---
+
+<BaseLayout
+  title="Blog"
+  description="Conseils et bonnes pratiques de l'agence Webmark'up : SEO, e-commerce, réseaux sociaux, webdesign, maintenance technique, génération de leads et cybersécurité."
+>
+  <PageHero
+    eyebrow="Notre actualité"
+    title="Le blog de Webmark'up"
+    lead="Conseils, méthodes et bonnes pratiques pour faire de votre site un vrai levier de croissance."
+  />
+
+  <section class="container-page py-16 sm:py-20">
+    <nav class="flex flex-wrap gap-2" aria-label="Catégories">
+      {
+        categories.map(([slug, name]) => (
+          <a
+            href={`/category/${slug}/`}
+            class="rounded-full bg-brand-50 px-4 py-2 text-sm font-semibold text-brand-700 transition hover:bg-brand-100"
+          >
+            {name}
+          </a>
+        ))
+      }
+    </nav>
+
+    <ul class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        posts.map((post, index) => (
+          <li>
+            <PostCard post={post} loading={index < 3 ? 'eager' : 'lazy'} />
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</BaseLayout>

@@ -1,0 +1,61 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Anciennes URLs WordPress -> nouvelles pages Astro
+[[redirects]]
+  from = "/feed/"
+  to = "/rss.xml"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/comments/feed/"
+  to = "/rss.xml"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/wp-sitemap.xml"
+  to = "/sitemap-index.xml"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/sitemap.xml"
+  to = "/sitemap-index.xml"
+  status = 301
+  force = true
+
+# Les anciens fichiers de médias WordPress sont désormais servis optimisés par Astro.
+[[redirects]]
+  from = "/wp-content/*"
+  to = "/404"
+  status = 404
+
+# Plus d'administration WordPress : on coupe court aux scans de bots.
+[[redirects]]
+  from = "/wp-admin/*"
+  to = "/404"
+  status = 404
+
+[[redirects]]
+  from = "/wp-login.php"
+  to = "/404"
+  status = 404
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

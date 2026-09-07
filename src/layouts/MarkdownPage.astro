@@ -1,0 +1,33 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import PageHero from '../components/PageHero.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  updatedDate?: Date;
+  noindex?: boolean;
+  eyebrow?: string;
+}
+
+const { title, description, updatedDate, noindex, eyebrow } = Astro.props;
+---
+
+<BaseLayout title={title} description={description} noindex={noindex}>
+  <PageHero title={title} eyebrow={eyebrow} />
+  <section class="container-page py-14 sm:py-16">
+    <div
+      class="prose prose-lg prose-slate mx-auto max-w-3xl prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-ink-900 prose-a:text-brand-600 prose-a:break-words prose-a:underline-offset-4 hover:prose-a:text-brand-700"
+    >
+      <slot />
+    </div>
+    {
+      updatedDate && (
+        <p class="mx-auto mt-10 max-w-3xl text-sm text-ink-800/60">
+          Dernière mise à jour le <FormattedDate date={updatedDate} />
+        </p>
+      )
+    }
+  </section>
+</BaseLayout>
