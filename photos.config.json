@@ -1,0 +1,15 @@
+{
+  "_comment": "Photos d'illustration. Chaque clé correspond au `name` d'un composant <Photo name=\"…\" />. Renseignez l'URL Unsplash (bouton « Download » → copier l'adresse de l'image, ou https://images.unsplash.com/photo-…?w=1800&q=80) puis lancez `node scripts/fetch-photos.mjs`.",
+  "photos": {
+    "equipe": {
+      "url": "",
+      "credit": "",
+      "alt": "L'équipe de Webmark'up au travail"
+    },
+    "atelier": {
+      "url": "",
+      "credit": "",
+      "alt": "Atelier de travail sur un projet web"
+    }
+  }
+}

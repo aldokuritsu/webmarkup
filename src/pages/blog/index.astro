@@ -1,8 +1,10 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import CtaBand from '../../components/CtaBand.astro';
 import PageHero from '../../components/PageHero.astro';
 import PostCard from '../../components/PostCard.astro';
+import Sticker from '../../components/Sticker.astro';
 
 const posts = (await getCollection('blog')).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
@@ -22,33 +24,37 @@ const categories = [
   description="Conseils et bonnes pratiques de l'agence Webmark'up : SEO, e-commerce, réseaux sociaux, webdesign, maintenance technique, génération de leads et cybersécurité."
 >
   <PageHero
-    eyebrow="Notre actualité"
-    title="Le blog de Webmark'up"
+    eyebrow="Le blog"
+    title="Notre actualité, sans blabla"
+    highlight="sans blabla"
     lead="Conseils, méthodes et bonnes pratiques pour faire de votre site un vrai levier de croissance."
   />
 
-  <section class="container-page py-16 sm:py-20">
-    <nav class="flex flex-wrap gap-2" aria-label="Catégories">
+  <section class="container-page py-20 sm:py-28">
+    <div class="flex flex-wrap items-center gap-3">
+      <span class="mr-2 hidden sm:block"><Sticker tone="violet">Filtrer</Sticker></span>
       {
         categories.map(([slug, name]) => (
           <a
             href={`/category/${slug}/`}
-            class="rounded-full bg-brand-50 px-4 py-2 text-sm font-semibold text-brand-700 transition hover:bg-brand-100"
+            class="rounded-full border-3 border-ink-950 bg-white px-4 py-2 font-display text-sm font-extrabold tracking-tight transition hover:-translate-y-0.5 hover:bg-spring-300"
           >
             {name}
           </a>
         ))
       }
-    </nav>
+    </div>
 
-    <ul class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <ul class="mt-14 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
       {
         posts.map((post, index) => (
           <li>
-            <PostCard post={post} loading={index < 3 ? 'eager' : 'lazy'} />
+            <PostCard post={post} loading={index < 3 ? 'eager' : 'lazy'} tilt={index % 3 === 1} />
           </li>
         ))
       }
     </ul>
   </section>
+
+  <CtaBand />
 </BaseLayout>

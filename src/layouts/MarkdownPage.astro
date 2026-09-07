@@ -9,22 +9,23 @@ interface Props {
   updatedDate?: Date;
   noindex?: boolean;
   eyebrow?: string;
+  highlight?: string;
 }
 
-const { title, description, updatedDate, noindex, eyebrow } = Astro.props;
+const { title, description, updatedDate, noindex, eyebrow, highlight } = Astro.props;
 ---
 
 <BaseLayout title={title} description={description} noindex={noindex}>
-  <PageHero title={title} eyebrow={eyebrow} />
-  <section class="container-page py-14 sm:py-16">
+  <PageHero title={title} eyebrow={eyebrow} highlight={highlight} />
+  <section class="container-page py-16 sm:py-20">
     <div
-      class="prose prose-lg prose-slate mx-auto max-w-3xl prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-ink-900 prose-a:text-brand-600 prose-a:break-words prose-a:underline-offset-4 hover:prose-a:text-brand-700"
+      class="prose prose-lg prose-slate mx-auto max-w-3xl prose-headings:font-display prose-headings:font-extrabold prose-headings:tracking-tight prose-headings:text-ink-950 prose-p:text-ink-900/80 prose-a:font-semibold prose-a:break-words prose-a:text-violet-600 prose-a:decoration-2 prose-a:underline-offset-4 hover:prose-a:text-violet-500 prose-li:text-ink-900/80 prose-li:marker:text-spring-500"
     >
       <slot />
     </div>
     {
       updatedDate && (
-        <p class="mx-auto mt-10 max-w-3xl text-sm text-ink-800/60">
+        <p class="mx-auto mt-12 max-w-3xl font-display text-sm font-bold tracking-widest text-ink-900/45 uppercase">
           Dernière mise à jour le <FormattedDate date={updatedDate} />
         </p>
       )

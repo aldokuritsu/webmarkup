@@ -1,0 +1,90 @@
+---
+/** Le motif de la marque en grand : barres violettes + courbe verte qui décolle. */
+interface Props {
+  class?: string;
+  labels?: string[];
+}
+const { class: className = '', labels = ['Attirer', 'Convertir', 'Fidéliser', 'Croître'] } =
+  Astro.props;
+
+const bars = [34, 52, 76, 112];
+---
+
+<svg
+  class={className}
+  viewBox="0 0 360 240"
+  role="img"
+  aria-label="Courbe de croissance : attirer, convertir, fidéliser, croître"
+>
+  <defs>
+    <linearGradient id="curve-bar" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#6a0fdb" stop-opacity="0.55"></stop>
+      <stop offset="100%" stop-color="#a674ff"></stop>
+    </linearGradient>
+    <linearGradient id="curve-line" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%" stop-color="#00d183"></stop>
+      <stop offset="100%" stop-color="#4dfab1"></stop>
+    </linearGradient>
+  </defs>
+
+  {
+    [0, 1, 2, 3].map((i) => (
+      <line
+        x1="18"
+        x2="342"
+        y1={186 - i * 42}
+        y2={186 - i * 42}
+        stroke="currentColor"
+        stroke-opacity="0.14"
+        stroke-width="1.5"
+        stroke-dasharray="4 8"
+      />
+    ))
+  }
+
+  {
+    bars.map((h, i) => (
+      <rect
+        x={38 + i * 78}
+        y={186 - h}
+        width="42"
+        height={h}
+        rx="10"
+        fill="url(#curve-bar)"
+      />
+    ))
+  }
+
+  <path
+    d="M26 176C74 176 96 140 138 116C182 91 226 74 268 52C296 37 316 28 340 20"
+    fill="none"
+    stroke="url(#curve-line)"
+    stroke-width="7"
+    stroke-linecap="round"
+  ></path>
+  <path
+    d="M312 16H344V48"
+    fill="none"
+    stroke="#4dfab1"
+    stroke-width="7"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  ></path>
+
+  {
+    bars.map((_, i) => (
+      <text
+        x={59 + i * 78}
+        y="212"
+        text-anchor="middle"
+        fill="currentColor"
+        fill-opacity="0.55"
+        font-family="'Bricolage Grotesque Variable', sans-serif"
+        font-size="14"
+        font-weight="700"
+      >
+        {labels[i]}
+      </text>
+    ))
+  }
+</svg>

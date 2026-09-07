@@ -1,6 +1,8 @@
 ---
 import { getCollection, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Button from '../../components/Button.astro';
+import CtaBand from '../../components/CtaBand.astro';
 import PageHero from '../../components/PageHero.astro';
 import PostCard from '../../components/PostCard.astro';
 
@@ -43,23 +45,20 @@ const count = posts.length;
     lead={`${count} article${count > 1 ? 's' : ''} dans cette catégorie.`}
   />
 
-  <section class="container-page py-16 sm:py-20">
-    <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+  <section class="container-page py-20 sm:py-28">
+    <ul class="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
       {
-        posts.map((post) => (
+        posts.map((post, index) => (
           <li>
-            <PostCard post={post} />
+            <PostCard post={post} loading="eager" tilt={index % 3 === 1} />
           </li>
         ))
       }
     </ul>
-    <p class="mt-12">
-      <a
-        href="/blog/"
-        class="font-semibold text-brand-600 underline underline-offset-4 transition hover:text-brand-700"
-      >
-        ← Retour au blog
-      </a>
-    </p>
+    <div class="mt-14">
+      <Button href="/blog/" variant="ink">← Retour au blog</Button>
+    </div>
   </section>
+
+  <CtaBand />
 </BaseLayout>

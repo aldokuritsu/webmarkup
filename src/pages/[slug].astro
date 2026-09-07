@@ -6,6 +6,7 @@ import CtaBand from '../components/CtaBand.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Icon from '../components/Icon.astro';
 import PostCard from '../components/PostCard.astro';
+import Sticker from '../components/Sticker.astro';
 import { SITE_TITLE, SITE_URL } from '../consts';
 
 export async function getStaticPaths() {
@@ -63,30 +64,43 @@ const jsonLd = {
   <script slot="head" type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
 
   <article>
-    <header class="bg-linear-to-br from-ink-950 via-ink-900 to-brand-900">
-      <div class="container-page py-16 sm:py-20">
-        <nav class="text-sm text-slate-400" aria-label="Fil d'Ariane">
-          <a class="transition hover:text-brand-400" href="/blog/">Blog</a>
+    <header class="grain relative overflow-hidden border-b-3 border-ink-950 bg-ink-950">
+      <div
+        class="pointer-events-none absolute -top-40 right-0 size-[36rem] rounded-full bg-violet-600/35 blur-[130px]"
+        aria-hidden="true"
+      >
+      </div>
+
+      <div class="container-page relative py-20 sm:py-24">
+        <nav
+          class="flex flex-wrap items-center gap-3 font-display text-sm font-bold tracking-tight text-violet-200/60"
+          aria-label="Fil d'Ariane"
+        >
+          <a class="transition hover:text-spring-400" href="/blog/">Blog</a>
           {
             category && categorySlug && (
               <>
-                <span class="px-2">/</span>
-                <a class="transition hover:text-brand-400" href={`/category/${categorySlug}/`}>
+                <span aria-hidden="true">/</span>
+                <a class="transition hover:text-spring-400" href={`/category/${categorySlug}/`}>
                   {category}
                 </a>
               </>
             )
           }
         </nav>
-        <h1 class="mt-4 max-w-4xl text-3xl font-bold tracking-tight text-white text-balance sm:text-4xl lg:text-5xl">
+
+        <h1
+          class="mt-7 max-w-5xl font-display text-[clamp(2.25rem,6vw,5rem)] leading-[0.94] font-extrabold text-white text-balance"
+        >
           {title}
         </h1>
-        <p class="mt-5 text-sm text-slate-400">
-          Publié le <FormattedDate date={pubDate} />
+
+        <p class="mt-8 font-display text-sm font-bold tracking-widest text-spring-400 uppercase">
+          <FormattedDate date={pubDate} />
           {
             updatedDate && updatedDate.valueOf() !== pubDate.valueOf() && (
               <>
-                {' — mis à jour le '}
+                <span class="text-violet-200/40"> · mis à jour le </span>
                 <FormattedDate date={updatedDate} />
               </>
             )
@@ -97,48 +111,62 @@ const jsonLd = {
 
     {
       heroImage && (
-        <div class="container-page -mt-8 sm:-mt-10">
-          <Image
-            src={heroImage}
-            alt={heroImageAlt ?? ''}
-            widths={[480, 800, 1200]}
-            sizes="(min-width: 1024px) 1024px, 100vw"
-            loading="eager"
-            class="aspect-16/7 w-full rounded-2xl object-cover shadow-xl shadow-ink-900/10"
-          />
+        <div class="container-page -mt-12 sm:-mt-16">
+          <div class="overflow-hidden rounded-[2rem] border-3 border-ink-950 bg-violet-950 shadow-hard-violet">
+            <Image
+              src={heroImage}
+              alt={heroImageAlt ?? ''}
+              widths={[480, 800, 1200, 1600]}
+              sizes="(min-width: 1280px) 1200px, 100vw"
+              loading="eager"
+              class="aspect-16/7 w-full object-cover"
+            />
+          </div>
         </div>
       )
     }
 
-    <div class="container-page py-14 sm:py-16">
+    <div class="container-page py-16 sm:py-20">
       <div
-        class="prose prose-lg prose-slate mx-auto max-w-3xl prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-ink-900 prose-a:text-brand-600 prose-a:underline-offset-4 hover:prose-a:text-brand-700"
+        class="prose prose-xl prose-slate mx-auto max-w-3xl prose-headings:font-display prose-headings:font-extrabold prose-headings:tracking-tight prose-headings:text-ink-950 prose-h2:mt-14 prose-h2:text-[clamp(1.75rem,3.5vw,2.5rem)] prose-h2:leading-tight prose-p:text-ink-900/80 prose-a:font-semibold prose-a:text-violet-600 prose-a:decoration-2 prose-a:underline-offset-4 hover:prose-a:text-violet-500 prose-strong:text-ink-950 prose-li:text-ink-900/80 prose-li:marker:text-spring-500"
       >
         <Content />
+      </div>
+
+      <div class="mx-auto mt-14 max-w-3xl border-t-3 border-ink-950 pt-8">
+        <a
+          href="/blog/"
+          class="inline-flex items-center gap-2 font-display text-lg font-extrabold tracking-tight text-violet-600 transition hover:text-violet-500"
+        >
+          <span aria-hidden="true">←</span> Tous les articles
+        </a>
       </div>
     </div>
   </article>
 
   {
     related.length > 0 && (
-      <section class="border-t border-ink-900/8 bg-brand-50/50 py-16 sm:py-20">
+      <section class="border-t-3 border-ink-950 bg-violet-50 py-20 sm:py-28">
         <div class="container-page">
           <div class="flex flex-wrap items-end justify-between gap-6">
-            <h2 class="text-2xl font-bold tracking-tight text-ink-900 sm:text-3xl">
-              À lire également
-            </h2>
+            <div>
+              <Sticker tone="violet">À lire aussi</Sticker>
+              <h2 class="mt-5 font-display text-[clamp(2rem,5vw,3.5rem)] leading-[0.95] font-extrabold text-ink-950">
+                Dans la même veine
+              </h2>
+            </div>
             <a
               href="/blog/"
-              class="inline-flex items-center gap-2 text-sm font-semibold text-brand-600 transition hover:text-brand-700"
+              class="inline-flex items-center gap-2 font-display font-extrabold tracking-tight text-violet-600 transition hover:text-violet-500"
             >
               Tous les articles
               <Icon name="arrow-right" class="size-4" />
             </a>
           </div>
-          <ul class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {related.map((item) => (
+          <ul class="mt-12 grid gap-8 md:grid-cols-3">
+            {related.map((item, index) => (
               <li>
-                <PostCard post={item} />
+                <PostCard post={item} tilt={index % 2 === 1} />
               </li>
             ))}
           </ul>

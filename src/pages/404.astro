@@ -8,13 +8,14 @@ import PageHero from '../components/PageHero.astro';
   <PageHero
     eyebrow="Erreur 404"
     title="Cette page n'existe pas (ou plus)"
+    highlight="n'existe pas"
     lead="Le contenu que vous cherchez a peut-être été déplacé lors de la refonte du site."
   />
-  <section class="container-page py-16 sm:py-20">
+  <section class="container-page py-20 sm:py-28">
     <div class="flex flex-wrap gap-4">
-      <Button href="/">Retour à l'accueil</Button>
-      <Button href="/blog/" variant="secondary">Parcourir le blog</Button>
-      <Button href="/nous-contacter/" variant="secondary">Nous contacter</Button>
+      <Button href="/" variant="primary" size="lg">Retour à l'accueil</Button>
+      <Button href="/blog/" variant="ink" size="lg">Parcourir le blog</Button>
+      <Button href="/nous-contacter/" variant="ink" size="lg">Nous contacter</Button>
     </div>
   </section>
 </BaseLayout>

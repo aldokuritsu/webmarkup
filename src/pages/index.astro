@@ -4,13 +4,32 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Button from '../components/Button.astro';
 import CtaBand from '../components/CtaBand.astro';
 import Icon from '../components/Icon.astro';
+import Marquee from '../components/Marquee.astro';
+import Photo from '../components/Photo.astro';
 import PostCard from '../components/PostCard.astro';
-import { CONTACT, SITE_DESCRIPTION, SITE_TAGLINE, SITE_URL } from '../consts';
+import RisingCurve from '../components/RisingCurve.astro';
+import Sticker from '../components/Sticker.astro';
+import { CONTACT, SITE_DESCRIPTION, SITE_URL } from '../consts';
 import { SERVICES } from '../data/services';
 
 const posts = (await getCollection('blog'))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 3);
+
+const steps = [
+  {
+    title: 'Attirer',
+    text: "On va chercher les bons visiteurs — SEO pour le long terme, SEA pour l'immédiat.",
+  },
+  {
+    title: 'Convertir',
+    text: 'On transforme ce trafic en leads qualifiés, avec un site pensé pour ça.',
+  },
+  {
+    title: 'Fidéliser',
+    text: "Contenus, réseaux sociaux, relances : on garde le contact et on l'automatise.",
+  },
+];
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -35,157 +54,271 @@ const jsonLd = {
 ---
 
 <BaseLayout title="Agence web à Rouen" description={SITE_DESCRIPTION}>
-  <script
-    slot="head"
-    type="application/ld+json"
-    is:inline
-    set:html={JSON.stringify(jsonLd)}
-  />
+  <script slot="head" type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
 
-  <!-- Hero -->
-  <section class="relative overflow-hidden bg-linear-to-br from-ink-950 via-ink-900 to-brand-900">
+  <!-- ================= HERO ================= -->
+  <section class="grain relative overflow-hidden border-b-3 border-ink-950 bg-ink-950">
     <div
-      class="pointer-events-none absolute -top-32 -right-24 size-96 rounded-full bg-brand-500/20 blur-3xl"
+      class="pointer-events-none absolute -top-48 -left-40 size-[42rem] rounded-full bg-violet-600/40 blur-[130px]"
       aria-hidden="true"
     >
     </div>
-    <div class="container-page relative py-20 sm:py-28">
-      <p class="text-sm font-semibold tracking-widest text-brand-400 uppercase">
-        Webmark'up — Agence web à {CONTACT.city}
-      </p>
-      <h1 class="mt-4 max-w-3xl text-4xl font-bold tracking-tight text-white text-balance sm:text-5xl lg:text-6xl">
-        {SITE_TAGLINE}
-      </h1>
-      <p class="mt-6 max-w-2xl text-lg leading-relaxed text-slate-300">
-        Chez Webmark'up, nous aidons les entreprises à transformer leur site internet en une machine
-        à générer des leads automatique et auto-géré. Nous utilisons des stratégies de webmarketing
-        avancées pour attirer les bons clients, les convertir en leads qualifiés et les fidéliser.
-        Nous vous offrons également des outils pour automatiser et optimiser le processus de
-        génération de leads, afin que vous puissiez vous concentrer sur ce qui est vraiment important
-        : la croissance de votre entreprise.
-      </p>
-      <div class="mt-10 flex flex-wrap gap-4">
-        <Button href="/a-propos/" variant="ghost" size="lg">Pourquoi nous choisir ?</Button>
-        <Button href="/nous-contacter/" size="lg">Nous contacter</Button>
+    <div
+      class="pointer-events-none absolute -right-32 -bottom-20 size-[34rem] rounded-full bg-spring-500/25 blur-[130px]"
+      aria-hidden="true"
+    >
+    </div>
+
+    <div class="container-page relative grid gap-16 py-20 lg:grid-cols-12 lg:items-center lg:py-28">
+      <div class="lg:col-span-7">
+        <Sticker>Agence web · {CONTACT.city}</Sticker>
+
+        <h1
+          class="mt-7 font-display text-[clamp(3rem,8.5vw,7rem)] leading-[0.88] font-extrabold tracking-[-0.045em] text-white"
+        >
+          Elevons votre<br />
+          <span class="text-spring-400">présence</span> en ligne
+        </h1>
+
+        <p class="mt-9 max-w-xl text-xl leading-relaxed text-violet-100/80">
+          On transforme votre site internet en <strong class="font-semibold text-white"
+            >machine à générer des leads</strong
+          >, automatique et auto-gérée. Vous vous concentrez sur la croissance de votre entreprise —
+          on s'occupe du reste.
+        </p>
+
+        <div class="mt-11 flex flex-wrap items-center gap-4">
+          <Button href="/nous-contacter/" variant="spring" size="lg">
+            Étudions votre projet
+            <Icon name="arrow-right" class="size-5 transition group-hover/btn:translate-x-1" />
+          </Button>
+          <Button href="/services/" variant="outline" size="lg">Voir nos services</Button>
+        </div>
+
+        <div class="mt-12 flex flex-wrap items-center gap-x-8 gap-y-3 text-sm text-violet-100/60">
+          <a class="inline-flex items-center gap-2 transition hover:text-spring-300" href={CONTACT.phoneHref}>
+            <Icon name="phone" class="size-4 text-spring-400" />
+            {CONTACT.phone}
+          </a>
+          <a class="inline-flex items-center gap-2 transition hover:text-spring-300" href={CONTACT.emailHref}>
+            <Icon name="mail" class="size-4 text-spring-400" />
+            {CONTACT.email}
+          </a>
+        </div>
+      </div>
+
+      <div class="lg:col-span-5">
+        <div class="relative">
+          <div
+            class="rounded-[2rem] border-3 border-spring-400/40 bg-violet-950/60 p-7 backdrop-blur-sm"
+          >
+            <p class="font-display text-sm font-extrabold tracking-widest text-spring-400 uppercase">
+              Notre feuille de route
+            </p>
+            <RisingCurve class="mt-5 w-full text-white" />
+          </div>
+
+          <span
+            class="absolute -top-5 -right-3 rotate-6 rounded-full border-3 border-ink-950 bg-spring-400 px-5 py-2 font-display text-sm font-extrabold tracking-tight text-ink-950 sm:-right-6"
+          >
+            Réponse sous 24h
+          </span>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Services -->
-  <section class="container-page py-20 sm:py-24">
-    <div class="max-w-2xl">
-      <h2 class="text-3xl font-bold tracking-tight text-ink-900 text-balance sm:text-4xl">
-        Tout ce dont votre présence en ligne a besoin
-      </h2>
-      <p class="mt-4 text-lg text-ink-800/80">
-        Six expertises complémentaires, de la conception de votre site à sa surveillance au
-        quotidien.
+  <Marquee />
+
+  <!-- ================= SERVICES ================= -->
+  <section class="container-page py-24 sm:py-32">
+    <div class="grid gap-8 lg:grid-cols-12 lg:items-end">
+      <div class="lg:col-span-8">
+        <Sticker tone="violet">Ce qu'on fait</Sticker>
+        <h2
+          class="mt-6 font-display text-[clamp(2.25rem,6vw,4.5rem)] leading-[0.95] font-extrabold text-balance text-ink-950"
+        >
+          Six expertises, <span class="underline-sketch">un seul interlocuteur</span>
+        </h2>
+      </div>
+      <p class="text-lg leading-relaxed text-ink-900/70 lg:col-span-4">
+        De la première ligne de code à la surveillance de vos données sur le dark web.
       </p>
     </div>
 
-    <ul class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <ul class="mt-16 border-t-3 border-ink-950">
       {
-        SERVICES.map((service) => (
-          <li class="rounded-2xl bg-white p-7 ring-1 ring-ink-900/8 transition hover:ring-brand-500/40 hover:shadow-lg hover:shadow-ink-900/5">
-            <span class="inline-flex size-12 items-center justify-center rounded-xl bg-brand-50 text-accent-500">
-              <Icon name={service.icon} class="size-6" />
-            </span>
-            <h3 class="mt-5 text-lg font-semibold text-ink-900">{service.title}</h3>
-            <p class="mt-3 text-sm leading-relaxed text-ink-800/80">{service.summary}</p>
+        SERVICES.map((service, index) => (
+          <li class="group border-b-3 border-ink-950">
+            <a
+              href={`/services/#${service.id}`}
+              class="grid items-baseline gap-x-8 gap-y-3 py-8 transition-colors duration-200 group-hover:bg-violet-100 sm:grid-cols-12 sm:px-6"
+            >
+              <span class="font-display text-4xl font-extrabold text-violet-300 tabular-nums transition group-hover:text-violet-600 sm:col-span-2 sm:text-6xl">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <h3 class="font-display text-3xl leading-tight font-extrabold text-ink-950 sm:col-span-4 sm:text-4xl">
+                {service.title}
+              </h3>
+              <p class="leading-relaxed text-ink-900/70 sm:col-span-5">{service.summary}</p>
+              <span class="hidden justify-self-end text-violet-600 transition group-hover:translate-x-2 sm:col-span-1 sm:block">
+                <Icon name="arrow-right" class="size-7" />
+              </span>
+            </a>
           </li>
         ))
       }
     </ul>
+  </section>
 
-    <div class="mt-10">
-      <Button href="/services/" variant="secondary">
-        Découvrir le détail de nos services
-        <Icon name="arrow-right" class="size-4" />
+  <!-- ================= METHODE ================= -->
+  <section class="grain relative overflow-hidden border-y-3 border-ink-950 bg-violet-950">
+    <div
+      class="pointer-events-none absolute top-1/2 left-1/2 size-[46rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-violet-600/30 blur-[130px]"
+      aria-hidden="true"
+    >
+    </div>
+
+    <div class="container-page relative py-24 sm:py-32">
+      <div class="max-w-3xl">
+        <Sticker>La méthode</Sticker>
+        <h2
+          class="mt-6 font-display text-[clamp(2.25rem,6vw,4.5rem)] leading-[0.95] font-extrabold text-white text-balance"
+        >
+          Attirer, convertir,<br /><span class="text-spring-400">fidéliser.</span>
+        </h2>
+        <p class="mt-7 text-xl leading-relaxed text-violet-100/75">
+          Nous utilisons des stratégies de webmarketing avancées pour attirer les bons clients, les
+          convertir en leads qualifiés et les fidéliser — puis nous automatisons tout ce qui peut
+          l'être.
+        </p>
+      </div>
+
+      <ol class="mt-16 grid gap-6 md:grid-cols-3">
+        {
+          steps.map((step, index) => (
+            <li class="rounded-3xl border-3 border-spring-400/30 bg-white/5 p-8 backdrop-blur-sm transition hover:border-spring-400/70">
+              <span class="font-display text-sm font-extrabold tracking-widest text-spring-400 uppercase">
+                Étape {index + 1}
+              </span>
+              <h3 class="mt-4 font-display text-3xl font-extrabold text-white">{step.title}</h3>
+              <p class="mt-4 leading-relaxed text-violet-100/70">{step.text}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- ================= A PROPOS ================= -->
+  <section class="container-page py-24 sm:py-32">
+    <div class="grid gap-14 lg:grid-cols-12 lg:items-center">
+      <div class="lg:col-span-6">
+        <Photo
+          name="equipe"
+          alt="L'équipe de Webmark'up au travail"
+          class="aspect-4/3 rounded-[2rem] border-3 border-ink-950 shadow-hard-violet"
+        />
+      </div>
+
+      <div class="lg:col-span-6">
+        <Sticker tone="violet">A propos</Sticker>
+        <h2
+          class="mt-6 font-display text-[clamp(2.25rem,5.5vw,4rem)] leading-[0.95] font-extrabold text-balance text-ink-950"
+        >
+          Des passionnés, pas des <span class="underline-sketch">commerciaux</span>
+        </h2>
+        <p class="mt-7 text-lg leading-relaxed text-ink-900/75">
+          Notre équipe est composée d'experts passionnés et expérimentés dans le domaine du
+          webmarketing et de la création de site web. Nous sommes fiers de notre savoir-faire et de
+          notre capacité à aider les entreprises à atteindre leurs objectifs en ligne.
+        </p>
+        <p class="mt-5 text-lg leading-relaxed text-ink-900/75">
+          Nous avons travaillé avec des entreprises de toutes tailles et de tous secteurs. Notre
+          engagement envers la qualité et la satisfaction de nos clients est ce qui nous distingue.
+        </p>
+        <Button href="/a-propos/" variant="primary" class="mt-9">
+          Faire connaissance
+          <Icon name="arrow-right" class="size-4 transition group-hover/btn:translate-x-1" />
+        </Button>
+      </div>
+    </div>
+  </section>
+
+  <Marquee
+    tone="violet"
+    items={['Rouen', 'Normandie', 'Partout en France', 'Depuis 2023', 'Sites qui convertissent']}
+  />
+
+  <!-- ================= BLOG ================= -->
+  <section class="container-page py-24 sm:py-32">
+    <div class="flex flex-wrap items-end justify-between gap-8">
+      <div>
+        <Sticker>Le blog</Sticker>
+        <h2
+          class="mt-6 font-display text-[clamp(2.25rem,6vw,4.5rem)] leading-[0.95] font-extrabold text-ink-950"
+        >
+          Notre actualité
+        </h2>
+      </div>
+      <Button href="/blog/" variant="ink">
+        Tous les articles
+        <Icon name="arrow-right" class="size-4 transition group-hover/btn:translate-x-1" />
       </Button>
     </div>
+
+    <ul class="mt-14 grid gap-8 md:grid-cols-3">
+      {
+        posts.map((post, index) => (
+          <li>
+            <PostCard post={post} tilt={index % 2 === 1} />
+          </li>
+        ))
+      }
+    </ul>
   </section>
 
   <CtaBand />
 
-  <!-- A propos -->
-  <section class="container-page py-20 sm:py-24">
-    <div class="mx-auto max-w-3xl text-center">
-      <p class="text-sm font-semibold tracking-widest text-brand-600 uppercase">A propos</p>
-      <h2 class="mt-3 text-3xl font-bold tracking-tight text-ink-900 text-balance sm:text-4xl">
-        Une équipe d'experts passionnés du webmarketing
-      </h2>
-      <p class="mt-5 text-lg leading-relaxed text-ink-800/80">
-        Notre équipe est composée d'experts passionnés et expérimentés dans le domaine du
-        webmarketing et de la création de site web. Nous sommes fiers de notre savoir-faire et de
-        notre capacité à aider les entreprises à atteindre leurs objectifs en ligne.
-      </p>
-      <Button href="/a-propos/" variant="secondary" class="mt-8">En savoir plus sur nous</Button>
-    </div>
-  </section>
-
-  <!-- Blog -->
-  <section class="bg-brand-50/60 py-20 sm:py-24">
-    <div class="container-page">
-      <div class="flex flex-wrap items-end justify-between gap-6">
-        <div>
-          <h2 class="text-3xl font-bold tracking-tight text-ink-900 sm:text-4xl">Notre actualité</h2>
-          <p class="mt-3 text-lg text-ink-800/80">
-            Conseils et bonnes pratiques pour votre présence en ligne.
-          </p>
-        </div>
-        <Button href="/blog/" variant="secondary">
-          Voir tous les articles
-          <Icon name="arrow-right" class="size-4" />
-        </Button>
+  <!-- ================= CONTACT ================= -->
+  <section class="container-page py-24 sm:py-32">
+    <div class="grid gap-12 lg:grid-cols-12 lg:items-center">
+      <div class="lg:col-span-7">
+        <Sticker tone="violet">Contact</Sticker>
+        <h2
+          class="mt-6 font-display text-[clamp(2.25rem,6vw,4.5rem)] leading-[0.95] font-extrabold text-balance text-ink-950"
+        >
+          On en parle ?
+        </h2>
+        <p class="mt-7 max-w-xl text-xl leading-relaxed text-ink-900/70">
+          Etudions ensemble votre projet : contactez-nous sans tarder, nous vous répondrons sous 24h.
+        </p>
       </div>
 
-      <ul class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {
-          posts.map((post) => (
-            <li>
-              <PostCard post={post} />
-            </li>
-          ))
-        }
+      <ul class="space-y-5 lg:col-span-5">
+        <li>
+          <a
+            href={CONTACT.phoneHref}
+            class="flex items-center gap-5 rounded-3xl border-3 border-ink-950 bg-white px-7 py-6 transition hover:-translate-y-1 hover:shadow-hard"
+          >
+            <Icon name="phone" class="size-6 text-violet-600" />
+            <span class="font-display text-2xl font-extrabold tracking-tight text-ink-950">
+              {CONTACT.phone}
+            </span>
+          </a>
+        </li>
+        <li>
+          <a
+            href={CONTACT.emailHref}
+            class="flex items-center gap-5 rounded-3xl border-3 border-ink-950 bg-white px-7 py-6 transition hover:-translate-y-1 hover:shadow-hard"
+          >
+            <Icon name="mail" class="size-6 text-violet-600" />
+            <span class="font-display text-xl font-extrabold tracking-tight break-all text-ink-950">
+              {CONTACT.email}
+            </span>
+          </a>
+        </li>
       </ul>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section class="container-page py-20 sm:py-24">
-    <div class="rounded-3xl bg-ink-950 px-8 py-14 sm:px-14">
-      <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
-        <div>
-          <p class="text-sm font-semibold tracking-widest text-brand-400 uppercase">Contact</p>
-          <h2 class="mt-3 text-3xl font-bold tracking-tight text-white text-balance sm:text-4xl">
-            Contactez-nous pour en savoir + !
-          </h2>
-          <p class="mt-4 text-lg text-slate-300">
-            Etudions ensemble votre projet : contactez-nous sans tarder, nous vous répondrons sous
-            24h !
-          </p>
-        </div>
-        <ul class="space-y-4">
-          <li>
-            <a
-              href={CONTACT.phoneHref}
-              class="flex items-center gap-4 rounded-2xl bg-white/5 px-6 py-5 text-white ring-1 ring-white/10 transition hover:bg-white/10"
-            >
-              <Icon name="phone" class="size-5 text-brand-400" />
-              <span class="text-lg font-semibold">{CONTACT.phone}</span>
-            </a>
-          </li>
-          <li>
-            <a
-              href={CONTACT.emailHref}
-              class="flex items-center gap-4 rounded-2xl bg-white/5 px-6 py-5 text-white ring-1 ring-white/10 transition hover:bg-white/10"
-            >
-              <Icon name="mail" class="size-5 text-brand-400" />
-              <span class="text-lg font-semibold break-all">{CONTACT.email}</span>
-            </a>
-          </li>
-        </ul>
-      </div>
     </div>
   </section>
 </BaseLayout>

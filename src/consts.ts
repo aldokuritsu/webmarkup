@@ -1,7 +1,6 @@
 /** Constantes globales du site. */
 export const SITE_URL = 'https://webmark-up.com';
 export const SITE_TITLE = "Webmark'up";
-export const SITE_TAGLINE = 'Elevons votre présence en ligne';
 export const SITE_DESCRIPTION =
   "Agence web à Rouen : création de site internet, gestion quotidienne, SEO, SEA et maintenance technique. Transformez votre site en machine à générer des leads.";
 

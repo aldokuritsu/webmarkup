@@ -1,0 +1,48 @@
+---
+/** Bandeau défilant — le petit coup de fouet visuel entre deux sections. */
+interface Props {
+  items?: string[];
+  tone?: 'spring' | 'violet';
+  class?: string;
+}
+
+const {
+  items = [
+    'Création de site',
+    'SEO',
+    'SEA',
+    'Gestion quotidienne',
+    'Maintenance technique',
+    'Surveillance dark web',
+  ],
+  tone = 'spring',
+  class: className = '',
+} = Astro.props;
+
+const tones = {
+  spring: 'bg-spring-400 text-ink-950 border-ink-950',
+  violet: 'bg-violet-600 text-white border-ink-950',
+};
+---
+
+<div
+  class:list={[
+    'flex overflow-hidden border-y-3 py-4 select-none',
+    tones[tone],
+    className,
+  ]}
+  aria-hidden="true"
+>
+  {
+    [0, 1].map(() => (
+      <ul class="flex shrink-0 animate-marquee items-center gap-10 pr-10">
+        {items.map((item) => (
+          <li class="flex shrink-0 items-center gap-10 font-display text-xl font-extrabold tracking-tight whitespace-nowrap uppercase sm:text-2xl">
+            {item}
+            <span class="text-[1.4em] leading-none opacity-60">✳</span>
+          </li>
+        ))}
+      </ul>
+    ))
+  }
+</div>

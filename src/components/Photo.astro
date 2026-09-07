@@ -1,0 +1,67 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+/**
+ * Photo d'illustration chargée depuis `src/assets/photos/<name>.<ext>`.
+ * Tant que le fichier n'est pas présent, on affiche une composition graphique
+ * aux couleurs de la marque : la page reste complète.
+ */
+interface Props {
+  name: string;
+  alt: string;
+  class?: string;
+  imgClass?: string;
+  duotone?: boolean;
+  loading?: 'eager' | 'lazy';
+  widths?: number[];
+  sizes?: string;
+}
+
+const {
+  name,
+  alt,
+  class: className = '',
+  imgClass = 'h-full w-full object-cover',
+  duotone = true,
+  loading = 'lazy',
+  widths = [480, 800, 1200],
+  sizes = '(min-width: 1024px) 50vw, 100vw',
+} = Astro.props;
+
+const files = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/assets/photos/*.{jpg,jpeg,png,webp,avif}',
+);
+const match = Object.keys(files).find((path) => path.split('/').pop()?.split('.')[0] === name);
+const image = match ? (await files[match]()).default : undefined;
+---
+
+<div class:list={['relative overflow-hidden bg-violet-950', duotone && image && 'duotone', className]}>
+  {
+    image ? (
+      <Image src={image} alt={alt} widths={widths} sizes={sizes} loading={loading} class={imgClass} />
+    ) : (
+      <div
+        class="h-full w-full bg-[radial-gradient(120%_120%_at_15%_15%,var(--color-violet-500)_0%,var(--color-violet-800)_45%,var(--color-ink-950)_100%)]"
+        role="img"
+        aria-label={alt}
+      >
+        <svg class="h-full w-full opacity-70" viewBox="0 0 400 300" aria-hidden="true">
+          <path
+            d="M-10 250C70 250 110 190 170 150C230 110 300 70 410 20"
+            fill="none"
+            stroke="#14e894"
+            stroke-width="10"
+            stroke-linecap="round"
+          />
+          <g fill="#a674ff" opacity="0.35">
+            <rect x="40" y="200" width="34" height="70" rx="8" />
+            <rect x="110" y="170" width="34" height="100" rx="8" />
+            <rect x="180" y="130" width="34" height="140" rx="8" />
+            <rect x="250" y="90" width="34" height="180" rx="8" />
+          </g>
+        </svg>
+      </div>
+    )
+  }
+</div>

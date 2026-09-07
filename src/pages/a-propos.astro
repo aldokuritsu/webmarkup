@@ -1,7 +1,28 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/Button.astro';
 import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
+import Marquee from '../components/Marquee.astro';
 import PageHero from '../components/PageHero.astro';
+import Photo from '../components/Photo.astro';
+import RisingCurve from '../components/RisingCurve.astro';
+import Sticker from '../components/Sticker.astro';
+
+const valeurs = [
+  {
+    title: 'Passionnés',
+    text: "Une équipe d'experts passionnés et expérimentés dans le domaine du webmarketing et de la création de site web.",
+  },
+  {
+    title: 'Polyvalents',
+    text: "Création de sites web, gestion quotidienne, SEO, SEA, maintenance technique : tout est traité en interne.",
+  },
+  {
+    title: 'Exigeants',
+    text: "Notre engagement envers la qualité et la satisfaction de nos clients est ce qui nous distingue de nos concurrents.",
+  },
+];
 ---
 
 <BaseLayout
@@ -10,33 +31,103 @@ import PageHero from '../components/PageHero.astro';
 >
   <PageHero
     eyebrow="A propos"
-    title="Une équipe d'experts passionnés du webmarketing"
+    title="Des passionnés, pas des commerciaux"
+    highlight="passionnés"
     lead="Nous sommes fiers de notre savoir-faire et de notre capacité à aider les entreprises à atteindre leurs objectifs en ligne."
   />
 
-  <section class="container-page py-16 sm:py-20">
-    <div class="max-w-3xl space-y-5 text-lg leading-relaxed text-ink-800/85">
-      <p>
-        Notre équipe de Webmark'up est composée d'experts passionnés et expérimentés dans le domaine
-        du webmarketing. Nous sommes fiers de notre savoir-faire et de notre capacité à aider les
-        entreprises à atteindre leurs objectifs en ligne.
-      </p>
-      <p>
-        Nous avons une grande expérience dans la création de sites web, la gestion quotidienne, le
-        SEO, le SEA et la maintenance technique. Nous avons travaillé avec des entreprises de toutes
-        tailles et de tous secteurs d'activité. Nous avons un savoir-faire en matière de génération
-        de leads automatique et auto-géré.
-      </p>
-      <p>
-        Notre engagement envers la qualité et la satisfaction de nos clients est ce qui nous
-        distingue de nos concurrents. Nous sommes toujours à l'écoute de vos besoins et nous mettons
-        tout en œuvre pour vous offrir les meilleurs résultats possibles.
-      </p>
-      <p>
-        N'hésitez pas à <a class="font-semibold text-brand-600 underline underline-offset-4 hover:text-brand-700" href="/nous-contacter/">nous contacter</a>
-        pour discuter de votre projet ou pour demander un devis. Nous serons ravis de vous aider à atteindre
-        vos objectifs en ligne avec Webmark'up.
-      </p>
+  <section class="container-page py-20 sm:py-28">
+    <div class="grid gap-14 lg:grid-cols-12 lg:items-center">
+      <div class="lg:col-span-6">
+        <Photo
+          name="equipe"
+          alt="L'équipe de Webmark'up au travail"
+          class="aspect-4/5 rounded-[2rem] border-3 border-ink-950 shadow-hard-violet"
+          loading="eager"
+        />
+      </div>
+
+      <div class="space-y-6 text-lg leading-relaxed text-ink-900/80 lg:col-span-6">
+        <p class="font-display text-2xl leading-snug font-bold text-ink-950">
+          Notre équipe de Webmark'up est composée d'experts passionnés et expérimentés dans le
+          domaine du webmarketing.
+        </p>
+        <p>
+          Nous avons une grande expérience dans la création de sites web, la gestion quotidienne, le
+          SEO, le SEA et la maintenance technique. Nous avons travaillé avec des entreprises de
+          toutes tailles et de tous secteurs d'activité, avec un vrai savoir-faire en matière de
+          génération de leads automatique et auto-gérée.
+        </p>
+        <p>
+          Notre engagement envers la qualité et la satisfaction de nos clients est ce qui nous
+          distingue de nos concurrents. Nous sommes toujours à l'écoute de vos besoins et nous
+          mettons tout en œuvre pour vous offrir les meilleurs résultats possibles.
+        </p>
+        <Button href="/nous-contacter/" class="mt-2">
+          Discuter de votre projet
+          <Icon name="arrow-right" class="size-4 transition group-hover/btn:translate-x-1" />
+        </Button>
+      </div>
+    </div>
+  </section>
+
+  <Marquee tone="violet" items={['Rouen', 'Normandie', 'Partout en France', 'Depuis 2023']} />
+
+  <!-- Valeurs -->
+  <section class="container-page py-20 sm:py-28">
+    <Sticker tone="violet">Ce qui nous distingue</Sticker>
+    <h2
+      class="mt-6 max-w-4xl font-display text-[clamp(2.25rem,6vw,4.5rem)] leading-[0.95] font-extrabold text-balance text-ink-950"
+    >
+      Trois choses sur lesquelles on ne transige pas
+    </h2>
+
+    <ul class="mt-14 grid gap-8 md:grid-cols-3">
+      {
+        valeurs.map((valeur, index) => (
+          <li
+            class:list={[
+              'rounded-[2rem] border-3 border-ink-950 p-9 transition hover:-translate-y-1.5 hover:shadow-hard',
+              index === 1 ? 'bg-spring-300' : 'bg-white',
+            ]}
+          >
+            <span class="font-display text-sm font-extrabold tracking-widest text-violet-600 uppercase">
+              0{index + 1}
+            </span>
+            <h3 class="mt-3 font-display text-3xl font-extrabold text-ink-950">{valeur.title}</h3>
+            <p class="mt-4 leading-relaxed text-ink-900/75">{valeur.text}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <!-- Méthode illustrée -->
+  <section class="grain relative overflow-hidden border-y-3 border-ink-950 bg-violet-950">
+    <div
+      class="pointer-events-none absolute top-0 right-0 size-[36rem] rounded-full bg-violet-600/35 blur-[130px]"
+      aria-hidden="true"
+    >
+    </div>
+    <div class="container-page relative grid gap-14 py-20 sm:py-28 lg:grid-cols-12 lg:items-center">
+      <div class="lg:col-span-6">
+        <Sticker>Notre obsession</Sticker>
+        <h2
+          class="mt-6 font-display text-[clamp(2.25rem,5.5vw,4rem)] leading-[0.95] font-extrabold text-white text-balance"
+        >
+          Un site qui <span class="text-spring-400">rapporte</span>, pas un site qui décore
+        </h2>
+        <p class="mt-7 text-xl leading-relaxed text-violet-100/75">
+          Nous avons un savoir-faire en matière de génération de leads automatique et auto-géré :
+          attirer les bons clients, les convertir, les fidéliser — et automatiser tout ce qui peut
+          l'être.
+        </p>
+      </div>
+      <div class="lg:col-span-6">
+        <div class="rounded-[2rem] border-3 border-spring-400/40 bg-white/5 p-8 backdrop-blur-sm">
+          <RisingCurve class="w-full text-white" />
+        </div>
+      </div>
     </div>
   </section>
 

@@ -1,7 +1,7 @@
 ---
 interface Props {
   href: string;
-  variant?: 'primary' | 'secondary' | 'ghost';
+  variant?: 'primary' | 'spring' | 'ink' | 'outline';
   size?: 'md' | 'lg';
   class?: string;
 }
@@ -9,15 +9,16 @@ interface Props {
 const { href, variant = 'primary', size = 'md', class: className = '' } = Astro.props;
 
 const base =
-  'inline-flex items-center justify-center gap-2 rounded-full font-semibold transition focus-visible:outline-2 focus-visible:outline-offset-2';
+  'group/btn inline-flex items-center justify-center gap-2.5 rounded-full font-display font-bold tracking-tight transition-transform duration-150 active:translate-y-0.5';
 const sizes = {
-  md: 'px-5 py-2.5 text-sm',
-  lg: 'px-7 py-3.5 text-base',
+  md: 'px-6 py-3 text-[0.95rem]',
+  lg: 'px-8 py-4 text-lg',
 };
 const variants = {
-  primary: 'bg-brand-500 text-white hover:bg-brand-600 shadow-sm shadow-brand-500/30',
-  secondary: 'bg-white text-ink-900 hover:bg-brand-50 ring-1 ring-ink-900/10',
-  ghost: 'text-white ring-1 ring-white/40 hover:bg-white/10',
+  primary: 'bg-violet-600 text-white hover:bg-violet-500',
+  spring: 'bg-spring-400 text-ink-950 hover:bg-spring-300',
+  ink: 'bg-ink-950 text-white hover:bg-ink-900',
+  outline: 'text-white ring-2 ring-white/35 hover:ring-spring-400 hover:text-spring-300',
 };
 ---
 

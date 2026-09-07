@@ -1,59 +1,77 @@
 ---
-import { CONTACT, NAV, SITE_TAGLINE } from '../consts';
+import { CONTACT, NAV } from '../consts';
 import Icon from './Icon.astro';
 import Logo from './Logo.astro';
 
 const year = new Date().getFullYear();
 ---
 
-<footer class="mt-24 bg-ink-950 text-slate-300">
-  <div class="container-page grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-4">
-    <div class="lg:col-span-2">
+<footer class="grain relative overflow-hidden bg-ink-950 text-violet-100">
+  <div
+    class="pointer-events-none absolute -bottom-24 -left-16 text-violet-600/15"
+    aria-hidden="true"
+  >
+    <Logo markOnly markClass="size-[26rem]" />
+  </div>
+
+  <div class="container-page relative grid gap-12 py-20 sm:grid-cols-2 lg:grid-cols-12">
+    <div class="lg:col-span-5">
       <Logo variant="light" />
-      <p class="mt-4 max-w-sm text-sm leading-relaxed text-slate-400">
-        {SITE_TAGLINE}. Agence web basée à {CONTACT.city}, en {CONTACT.region} : création de site
-        internet, gestion quotidienne, SEO, SEA et maintenance technique.
+      <p class="mt-6 max-w-sm text-lg leading-relaxed text-violet-200/70">
+        Agence web à {CONTACT.city}. On construit des sites qui travaillent pour vous — et on les
+        garde en forme.
       </p>
+      <a
+        href="/nous-contacter/"
+        class="mt-8 inline-flex items-center gap-2 font-display text-2xl font-extrabold tracking-tight text-spring-400 underline decoration-3 underline-offset-8 transition hover:text-spring-300"
+      >
+        Démarrer un projet
+        <Icon name="arrow-right" class="size-6" />
+      </a>
     </div>
 
-    <div>
-      <h2 class="text-sm font-semibold tracking-wide text-white uppercase">Navigation</h2>
-      <ul class="mt-4 space-y-2.5 text-sm">
+    <div class="lg:col-span-3 lg:col-start-7">
+      <h2 class="font-display text-sm font-extrabold tracking-widest text-spring-400 uppercase">
+        Navigation
+      </h2>
+      <ul class="mt-6 space-y-3 text-[1.05rem]">
         {
           NAV.map((item) => (
             <li>
-              <a class="transition hover:text-brand-400" href={item.href}>
+              <a class="transition hover:text-spring-300" href={item.href}>
                 {item.label}
               </a>
             </li>
           ))
         }
         <li>
-          <a class="transition hover:text-brand-400" href="/privacy-policy/">
+          <a class="transition hover:text-spring-300" href="/privacy-policy/">
             Politique de confidentialité
           </a>
         </li>
       </ul>
     </div>
 
-    <div>
-      <h2 class="text-sm font-semibold tracking-wide text-white uppercase">Contact</h2>
-      <ul class="mt-4 space-y-3 text-sm">
+    <div class="lg:col-span-3">
+      <h2 class="font-display text-sm font-extrabold tracking-widest text-spring-400 uppercase">
+        Contact
+      </h2>
+      <ul class="mt-6 space-y-4 text-[1.05rem]">
         <li>
-          <a class="inline-flex items-center gap-2.5 transition hover:text-brand-400" href={CONTACT.phoneHref}>
-            <Icon name="phone" class="size-4 text-brand-500" />
+          <a class="inline-flex items-center gap-3 transition hover:text-spring-300" href={CONTACT.phoneHref}>
+            <Icon name="phone" class="size-4 text-spring-400" />
             {CONTACT.phone}
           </a>
         </li>
         <li>
-          <a class="inline-flex items-center gap-2.5 transition hover:text-brand-400" href={CONTACT.emailHref}>
-            <Icon name="mail" class="size-4 text-brand-500" />
+          <a class="inline-flex items-center gap-3 transition hover:text-spring-300" href={CONTACT.emailHref}>
+            <Icon name="mail" class="size-4 text-spring-400" />
             {CONTACT.email}
           </a>
         </li>
         <li>
-          <a class="inline-flex items-center gap-2.5 transition hover:text-brand-400" href="/rss.xml">
-            <Icon name="rss" class="size-4 text-brand-500" />
+          <a class="inline-flex items-center gap-3 transition hover:text-spring-300" href="/rss.xml">
+            <Icon name="rss" class="size-4 text-spring-400" />
             Flux RSS
           </a>
         </li>
@@ -61,8 +79,8 @@ const year = new Date().getFullYear();
     </div>
   </div>
 
-  <div class="border-t border-white/10">
-    <p class="container-page py-6 text-center text-xs text-slate-500">
+  <div class="relative border-t border-white/10">
+    <p class="container-page py-6 text-center text-xs tracking-wide text-violet-200/50 uppercase">
       &copy; {year} Webmark'up — Tous droits réservés
     </p>
   </div>

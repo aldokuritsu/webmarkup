@@ -24,15 +24,57 @@ src/
 ├── content/
 │   ├── blog/          9 articles migrés (Markdown + frontmatter)
 │   └── pages/         pages éditoriales simples (confidentialité, page héritée)
+├── assets/photos/     photos d'illustration (voir « Photos » ci-dessous)
 ├── data/services.ts   offre de services (accueil + page « Nos services »)
 ├── layouts/           BaseLayout, MarkdownPage
 ├── pages/             routes du site (voir plan d'URL ci-dessous)
 ├── consts.ts          titre, description, coordonnées, menu
-└── styles/global.css  thème Tailwind CSS v4 (couleurs de marque)
+└── styles/global.css  charte Tailwind CSS v4 (couleurs, grain, duotone, marquee)
 scripts/
-├── scrape-wordpress.mjs   régénère les contenus depuis l'API REST WordPress
-└── generate-og-image.mjs  régénère public/og-default.png
+├── scrape-wordpress.mjs      régénère les contenus depuis l'API REST WordPress
+├── fetch-photos.mjs          télécharge les photos listées dans photos.config.json
+└── generate-brand-assets.mjs régénère favicons et image Open Graph
 ```
+
+## Direction artistique
+
+La charte reprend le **violet et le vert** historiques, ainsi que la **courbe
+statistique en flèche montante** — devenue le pictogramme de la marque
+(`src/components/Logo.astro`) et un motif réutilisé en grand
+(`src/components/RisingCurve.astro`).
+
+| Rôle | Valeur |
+| --- | --- |
+| Violet principal | `--color-violet-600` `#7c1fff` |
+| Vert accent | `--color-spring-400` `#14e894` |
+| Encre violacée | `--color-ink-950` `#0b0413` |
+| Crème | `--color-cream` `#f7f4ff` |
+
+Typographie : **Bricolage Grotesque** pour les titres, **Inter** pour le texte —
+auto-hébergées via Fontsource, aucune requête vers Google Fonts.
+
+Les partis pris visuels sont rassemblés dans `src/styles/global.css` sous forme
+d'utilitaires Tailwind réutilisables : `grain` (bruit sur les fonds sombres),
+`duotone` (photos en bichromie violet/vert, couleur d'origine révélée au survol),
+`shadow-hard` / `shadow-hard-violet` (ombres décalées façon sérigraphie),
+`underline-sketch` (surlignage vert d'un mot clé). S'y ajoutent le bandeau
+défilant (`Marquee.astro`) et les pastilles inclinées (`Sticker.astro`).
+
+## Photos
+
+Les visuels d'illustration passent par `<Photo name="…" />`, qui charge
+`src/assets/photos/<name>.<ext>`. **Tant qu'un fichier est absent, une
+composition graphique aux couleurs de la marque prend sa place** : aucune page
+n'est jamais cassée.
+
+Pour poser de vraies photos : renseigner les URL dans `photos.config.json`
+(Unsplash ou autre), puis
+
+```bash
+node scripts/fetch-photos.mjs
+```
+
+Emplacements attendus : `equipe` (accueil + à propos) et `atelier` (services).
 
 ## Plan d'URL
 
@@ -100,8 +142,9 @@ e-mail vers `contact@webmark-up.com`.
   anglais, qui évoque des fonctionnalités inexistantes ici (commentaires,
   comptes). À remplacer par une vraie politique en français, mentionnant le
   formulaire de contact et l'hébergement Netlify.
+- **Photos d'illustration** : `photos.config.json` attend deux URL (`equipe`,
+  `atelier`). En attendant, le site affiche des compositions graphiques.
 - **Images de fond du thème** (`bg-welcome.jpg`, `bg-cta.jpg`) : elles
-  appartenaient au thème *Integral* et n'ont pas été reprises ; les sections
-  concernées utilisent désormais des dégradés aux couleurs de la marque.
+  appartenaient au thème *Integral* et n'ont pas été reprises.
 - **Réseaux sociaux** : aucun lien n'était renseigné sur l'ancien site, aucun
   n'a donc été ajouté au pied de page.

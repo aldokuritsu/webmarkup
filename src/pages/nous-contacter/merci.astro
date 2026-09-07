@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Button from '../../components/Button.astro';
+import Icon from '../../components/Icon.astro';
 import PageHero from '../../components/PageHero.astro';
 ---
 
@@ -8,12 +9,16 @@ import PageHero from '../../components/PageHero.astro';
   <PageHero
     eyebrow="Merci !"
     title="Votre demande est bien arrivée"
+    highlight="bien arrivée"
     lead="Nous revenons vers vous sous 24h avec une première analyse de votre projet."
   />
-  <section class="container-page py-16 sm:py-20">
+  <section class="container-page py-20 sm:py-28">
     <div class="flex flex-wrap gap-4">
-      <Button href="/">Retour à l'accueil</Button>
-      <Button href="/blog/" variant="secondary">Lire notre blog</Button>
+      <Button href="/" variant="primary" size="lg">
+        Retour à l'accueil
+        <Icon name="arrow-right" class="size-5 transition group-hover/btn:translate-x-1" />
+      </Button>
+      <Button href="/blog/" variant="ink" size="lg">Lire notre blog</Button>
     </div>
   </section>
 </BaseLayout>

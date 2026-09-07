@@ -4,27 +4,26 @@ import Icon from './Icon.astro';
 import Logo from './Logo.astro';
 
 const pathname = Astro.url.pathname;
-const isActive = (href: string) =>
-  href === '/' ? pathname === '/' : pathname.startsWith(href);
+const isActive = (href: string) => (href === '/' ? pathname === '/' : pathname.startsWith(href));
 ---
 
-<header class="sticky top-0 z-50 border-b border-ink-900/5 bg-white/85 backdrop-blur">
-  <div class="container-page flex h-18 items-center justify-between gap-4 py-3">
-    <a href="/" class="rounded-lg" aria-label="Webmark'up — accueil">
+<header class="sticky top-0 z-50 border-b-3 border-ink-950 bg-cream/95 backdrop-blur">
+  <div class="container-page flex h-20 items-center justify-between gap-4">
+    <a href="/" class="rounded-xl" aria-label="Webmark'up — accueil">
       <Logo />
     </a>
 
-    <nav class="hidden items-center gap-1 md:flex" aria-label="Navigation principale">
+    <nav class="hidden items-center gap-1 lg:flex" aria-label="Navigation principale">
       {
         NAV.map((item) => (
           <a
             href={item.href}
             aria-current={isActive(item.href) ? 'page' : undefined}
             class:list={[
-              'rounded-full px-3.5 py-2 text-sm font-medium transition',
+              'relative rounded-full px-4 py-2 font-display text-[0.95rem] font-bold tracking-tight transition',
               isActive(item.href)
-                ? 'bg-brand-50 text-brand-700'
-                : 'text-ink-800 hover:bg-ink-900/5 hover:text-ink-900',
+                ? 'bg-ink-950 text-spring-400'
+                : 'text-ink-900 hover:bg-violet-100',
             ]}
           >
             {item.label}
@@ -33,16 +32,17 @@ const isActive = (href: string) =>
       }
       <a
         href="/nous-contacter/"
-        class="ml-2 inline-flex items-center gap-2 rounded-full bg-brand-500 px-4 py-2 text-sm font-semibold text-white transition hover:bg-brand-600"
+        class="ml-3 inline-flex items-center gap-2 rounded-full border-3 border-ink-950 bg-spring-400 px-5 py-2.5 font-display font-extrabold tracking-tight text-ink-950 transition hover:-translate-y-0.5 hover:shadow-[4px_4px_0_0_var(--color-ink-950)]"
       >
-        Étudier mon projet
+        Parlons-en
+        <Icon name="arrow-right" class="size-4" />
       </a>
     </nav>
 
     <button
       type="button"
       id="nav-toggle"
-      class="inline-flex items-center justify-center rounded-lg p-2 text-ink-900 hover:bg-ink-900/5 md:hidden"
+      class="inline-flex items-center justify-center rounded-xl border-3 border-ink-950 p-2 text-ink-950 lg:hidden"
       aria-expanded="false"
       aria-controls="mobile-nav"
     >
@@ -51,22 +51,29 @@ const isActive = (href: string) =>
     </button>
   </div>
 
-  <div id="mobile-nav" class="border-t border-ink-900/5 bg-white md:hidden" hidden>
-    <nav class="container-page flex flex-col py-3" aria-label="Navigation mobile">
+  <div id="mobile-nav" class="border-t-3 border-ink-950 bg-cream lg:hidden" hidden>
+    <nav class="container-page flex flex-col py-4" aria-label="Navigation mobile">
       {
         NAV.map((item) => (
           <a
             href={item.href}
             aria-current={isActive(item.href) ? 'page' : undefined}
             class:list={[
-              'rounded-lg px-3 py-3 text-base font-medium',
-              isActive(item.href) ? 'text-brand-700' : 'text-ink-800',
+              'border-b border-ink-950/10 py-4 font-display text-xl font-extrabold tracking-tight',
+              isActive(item.href) ? 'text-violet-600' : 'text-ink-950',
             ]}
           >
             {item.label}
           </a>
         ))
       }
+      <a
+        href="/nous-contacter/"
+        class="mt-5 inline-flex items-center justify-center gap-2 rounded-full border-3 border-ink-950 bg-spring-400 px-5 py-3 font-display font-extrabold tracking-tight text-ink-950"
+      >
+        Parlons-en
+        <Icon name="arrow-right" class="size-4" />
+      </a>
     </nav>
   </div>
 </header>
