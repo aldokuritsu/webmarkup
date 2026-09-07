@@ -1,15 +1,20 @@
 {
-  "_comment": "Photos d'illustration. Chaque clé correspond au `name` d'un composant <Photo name=\"…\" />. Renseignez l'URL Unsplash (bouton « Download » → copier l'adresse de l'image, ou https://images.unsplash.com/photo-…?w=1800&q=80) puis lancez `node scripts/fetch-photos.mjs`.",
+  "_comment": "Photos d'illustration. Chaque clé correspond au `name` d'un composant <Photo name=\"…\" />. Renseignez l'URL puis lancez `node scripts/fetch-photos.mjs`.",
   "photos": {
     "equipe": {
-      "url": "",
-      "credit": "",
-      "alt": "L'équipe de Webmark'up au travail"
+      "url": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1800&q=80&fm=jpg&fit=max",
+      "credit": "Unsplash",
+      "alt": "L'équipe de Webmark'up au travail autour d'un projet"
     },
     "atelier": {
-      "url": "",
-      "credit": "",
-      "alt": "Atelier de travail sur un projet web"
+      "url": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=1800&q=80&fm=jpg&fit=max",
+      "credit": "Unsplash",
+      "alt": "Atelier de cadrage d'un projet web"
+    },
+    "echange": {
+      "url": "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1800&q=80&fm=jpg&fit=max",
+      "credit": "Unsplash",
+      "alt": "Échange autour d'un projet devant un ordinateur portable"
     }
   }
 }

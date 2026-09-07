@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Icon from '../components/Icon.astro';
 import Marquee from '../components/Marquee.astro';
 import PageHero from '../components/PageHero.astro';
+import Photo from '../components/Photo.astro';
 import Sticker from '../components/Sticker.astro';
 import { CONTACT } from '../consts';
 
@@ -130,6 +131,12 @@ const labelClass = 'block font-display text-sm font-extrabold tracking-wide uppe
             Réponse sous 24h, promis.
           </p>
         </div>
+
+        <Photo
+          name="echange"
+          alt="Échange autour d'un projet devant un ordinateur portable"
+          class="mt-8 aspect-4/3 rounded-3xl border-3 border-ink-950"
+        />
       </aside>
     </div>
   </section>

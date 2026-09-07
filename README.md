@@ -63,18 +63,24 @@ défilant (`Marquee.astro`) et les pastilles inclinées (`Sticker.astro`).
 ## Photos
 
 Les visuels d'illustration passent par `<Photo name="…" />`, qui charge
-`src/assets/photos/<name>.<ext>`. **Tant qu'un fichier est absent, une
-composition graphique aux couleurs de la marque prend sa place** : aucune page
-n'est jamais cassée.
+`src/assets/photos/<name>.<ext>` et applique la bichromie violet/vert. **Tant
+qu'un fichier est absent, une composition graphique aux couleurs de la marque
+prend sa place** : aucune page n'est jamais cassée.
 
-Pour poser de vraies photos : renseigner les URL dans `photos.config.json`
-(Unsplash ou autre), puis
+| Emplacement | Utilisé sur |
+| --- | --- |
+| `equipe` | accueil (section « A propos »), page A propos |
+| `atelier` | page Nos services |
+| `echange` | page Nous contacter |
 
-```bash
-node scripts/fetch-photos.mjs
-```
+Les sources sont déclarées dans `photos.config.json` ; `node scripts/fetch-photos.mjs`
+les télécharge dans `src/assets/photos/` et consigne l'origine dans
+`src/data/photo-credits.json`. Les trois photos actuelles viennent d'Unsplash
+(licence Unsplash : usage commercial autorisé, attribution non obligatoire) —
+ajoutez le nom du photographe dans `credit` si vous souhaitez l'afficher.
 
-Emplacements attendus : `equipe` (accueil + à propos) et `atelier` (services).
+Pour changer une photo : remplacer l'URL dans `photos.config.json`, relancer le
+script, rebuild. Astro se charge du redimensionnement et de la conversion WebP.
 
 ## Plan d'URL
 
@@ -142,8 +148,9 @@ e-mail vers `contact@webmark-up.com`.
   anglais, qui évoque des fonctionnalités inexistantes ici (commentaires,
   comptes). À remplacer par une vraie politique en français, mentionnant le
   formulaire de contact et l'hébergement Netlify.
-- **Photos d'illustration** : `photos.config.json` attend deux URL (`equipe`,
-  `atelier`). En attendant, le site affiche des compositions graphiques.
+- **Photos d'illustration** : les trois visuels actuels sont des photos de banque
+  d'images. À remplacer par de vraies photos de l'équipe et des locaux dès que
+  possible — c'est ce qui fera la différence sur une page « A propos ».
 - **Images de fond du thème** (`bg-welcome.jpg`, `bg-cta.jpg`) : elles
   appartenaient au thème *Integral* et n'ont pas été reprises.
 - **Réseaux sociaux** : aucun lien n'était renseigné sur l'ancien site, aucun
