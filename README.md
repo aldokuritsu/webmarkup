@@ -122,6 +122,16 @@ des gabarits Astro et ne sont pas régénérées — leurs textes vivent dans
 Une fois le site en production, ce script n'a plus lieu d'être : les contenus
 s'éditent directement dans `src/content/`.
 
+## Mesure d'audience
+
+Umami (auto-hébergé sur `umami.doknet.cloud`) est chargé depuis
+`src/components/BaseHead.astro`, donc présent sur toutes les pages. Sans cookie
+ni donnée personnelle : pas de bandeau de consentement nécessaire.
+
+```html
+<script defer src="https://umami.doknet.cloud/script.js" data-website-id="…"></script>
+```
+
 ## Déploiement Netlify
 
 `netlify.toml` contient déjà la configuration : commande `npm run build`,
