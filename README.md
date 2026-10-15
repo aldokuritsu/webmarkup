@@ -124,12 +124,12 @@ s'éditent directement dans `src/content/`.
 
 ## Mesure d'audience
 
-Umami (auto-hébergé sur `umami.doknet.cloud`) est chargé depuis
+Umami (auto-hébergé sur `https://umami.doknets.fr`) est chargé depuis
 `src/components/BaseHead.astro`, donc présent sur toutes les pages. Sans cookie
 ni donnée personnelle : pas de bandeau de consentement nécessaire.
 
 ```html
-<script defer src="https://umami.doknet.cloud/script.js" data-website-id="…"></script>
+<script defer src="https://umami.doknets.fr/script.js" data-website-id="…"></script>
 ```
 
 ## Déploiement Netlify
