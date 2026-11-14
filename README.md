@@ -145,10 +145,9 @@ dossier publié `dist`, Node 22, redirections et en-têtes de cache.
    Encrypt) et la redirection HTTPS.
 
 Le formulaire de contact est envoyé par **FormSubmit** (`POST` vers
-`https://formsubmit.co/alexandre@dkts.fr`). Après envoi, le visiteur est
-redirigé vers `/nous-contacter/merci/`. La première soumission réelle déclenche
-un e-mail d'activation à confirmer sur `alexandre@dkts.fr` ; ensuite les
-messages arrivent directement sur cette adresse.
+`https://formsubmit.co/0bce3e122c613f62d320b3c66b525370`). Après envoi, le visiteur est
+redirigé vers `/nous-contacter/merci/`. Les messages arrivent sur l'adresse
+associée à cet alias.
 
 ## Points à valider côté éditorial
 
