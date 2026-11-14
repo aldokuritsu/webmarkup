@@ -4,6 +4,8 @@ description: "Mises à jour, sauvegardes, accès, plugins morts, monitoring : le
 pubDate: 2026-11-10
 category: "Maintenance technique"
 categorySlug: "maintenance-technique"
+heroImage: "../../assets/images/maintenance-wordpress-5-oublis.jpg"
+heroImageAlt: "Fenêtre de site entourée d'une clé, d'un tournevis, d'un bouclier, d'une mise à jour, d'une sauvegarde et d'une checklist"
 ---
 
 WordPress reste massivement utilisé par les PME, et pour de bonnes raisons : flexibilité, écosystème, autonomie éditoriale. Mais un WordPress sans maintenance n'est pas « stable ». Il vieillit. Les oublis les plus coûteux ne sont pas toujours spectaculaires au jour J. Ils se paient le jour où le site tombe, se fait pirater, ou où personne ne sait plus qui a les accès.

@@ -4,6 +4,8 @@ description: "Avant de redessiner votre formulaire, vérifiez champs, friction, 
 pubDate: 2026-11-09
 category: "Génération de leads"
 categorySlug: "generation-de-leads"
+heroImage: "../../assets/images/formulaire-contact-qui-convertit.jpg"
+heroImageAlt: "Ordinateur portable avec un formulaire, curseur sur le bouton vert d'envoi, et message qui arrive dans une boîte validée"
 ---
 
 Quand un site ne génère pas assez de demandes, le réflexe est souvent esthétique : « On refait le formulaire, plus moderne. » En pratique, le design arrive après. Un formulaire qui convertit est d'abord un parcours clair, court, crédible — sur mobile comme sur desktop.

@@ -4,6 +4,8 @@ description: "Votre site attire-t-il vraiment des demandes, ou se contente-t-il 
 pubDate: 2026-11-07
 category: "Génération de leads"
 categorySlug: "generation-de-leads"
+heroImage: "../../assets/images/site-vitrine-vs-machine-a-leads.jpg"
+heroImageAlt: "Site vitrine gris à gauche et entonnoir violet qui transforme des messages en fiche client validée"
 ---
 
 Beaucoup de dirigeants de PME pensent avoir « un site qui marche ». En pratique, ce site reçoit parfois du trafic, affiche une belle photo d'équipe… et génère peu de demandes. La différence entre une vitrine et une machine à leads n'est pas une question de design flashy. C'est une question de clarté, de parcours et de suivi.

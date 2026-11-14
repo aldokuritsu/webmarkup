@@ -4,6 +4,8 @@ description: "Perf, accessibilité, clarté, conversion : les tendances webdesig
 pubDate: 2026-11-13
 category: "Webdesign"
 categorySlug: "webdesign"
+heroImage: "../../assets/images/tendances-webdesign-2026.jpg"
+heroImageAlt: "Maquette de site sur écran d'ordinateur et téléphone, avec une palette violet et vert, un stylo et des points d'ancrage"
 ---
 
 En 2023, on parlait déjà de sites plus sobres, plus rapides, plus centrés sur l'usage. En 2026, la tendance de fond n'est pas une nouvelle police « disruptive ». C'est une exigence plus dure : **un design qui charge vite, qui se comprend, qui se manipule, et qui aide à convertir**.

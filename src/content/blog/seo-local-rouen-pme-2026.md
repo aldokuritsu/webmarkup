@@ -4,6 +4,8 @@ description: "Google Business Profile, pages locales, avis, NAP : le SEO local u
 pubDate: 2026-11-08
 category: "SEO"
 categorySlug: "seo"
+heroImage: "../../assets/images/seo-local-rouen-pme-2026.jpg"
+heroImageAlt: "Téléphone affichant une carte et un repère, entre la cathédrale de Rouen et le Gros-Horloge, avec une loupe et des étoiles d'avis"
 ---
 
 Pour une PME ancrée à Rouen ou en Normandie, le référencement local n'est pas un « plus ». C'est souvent le canal qui amène les demandes les plus concrètes : quelqu'un cherche un prestataire près de chez lui, compare rapidement, contacte. En 2026, les bases n'ont pas disparu — elles se sont durcies. Google favorise les fiches et les pages claires, cohérentes, crédibles.
