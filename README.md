@@ -144,10 +144,11 @@ dossier publié `dist`, Node 22, redirections et en-têtes de cache.
 4. Faire pointer le DNS vers Netlify, puis activer le certificat HTTPS (Let's
    Encrypt) et la redirection HTTPS.
 
-Le formulaire de contact utilise **Netlify Forms** (`data-netlify="true"`) : il
-fonctionne dès le premier déploiement, sans backend. Les messages arrivent dans
-*Forms* sur le tableau de bord Netlify — penser à y ajouter une notification par
-e-mail vers `contact@webmark-up.com`.
+Le formulaire de contact est envoyé par **FormSubmit** (`POST` vers
+`https://formsubmit.co/alexandre@dkts.fr`). Après envoi, le visiteur est
+redirigé vers `/nous-contacter/merci/`. La première soumission réelle déclenche
+un e-mail d'activation à confirmer sur `alexandre@dkts.fr` ; ensuite les
+messages arrivent directement sur cette adresse.
 
 ## Points à valider côté éditorial
 
