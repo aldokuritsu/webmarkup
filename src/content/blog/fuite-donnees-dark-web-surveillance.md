@@ -4,6 +4,8 @@ description: "Mettre un site en ligne ne termine pas la sécurité. Pourquoi sur
 pubDate: 2026-11-12
 category: "Cybersécurité"
 categorySlug: "cybersecurite"
+heroImage: "../../assets/images/fuite-donnees-dark-web-surveillance.jpg"
+heroImageAlt: "Silhouette devant un ordinateur, cadenas fissuré, et loupe qui examine des e-mails et des clés exposés"
 ---
 
 Mettre un site en ligne, c'est souvent vécu comme une ligne d'arrivée : design validé, formulaires OK, on respire. En réalité, c'est le début d'une vie numérique exposée. Comptes professionnels, emails, mots de passe réutilisés, accès hébergeur, outils marketing… Les fuites ne commencent pas toujours « sur votre site ». Elles apparaissent parfois ailleurs — et se retrouvent revendues ou partagées sur des forums et marchés du dark web.

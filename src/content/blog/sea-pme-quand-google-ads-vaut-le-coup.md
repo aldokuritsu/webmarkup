@@ -4,6 +4,8 @@ description: "Budget, landing, tracking, complémentarité SEO : critères pragm
 pubDate: 2026-11-11
 category: "SEA"
 categorySlug: "sea"
+heroImage: "../../assets/images/sea-pme-quand-google-ads-vaut-le-coup.jpg"
+heroImageAlt: "Main qui place une pièce sur une annonce sponsorisée, à côté d'une cible et d'un graphique en hausse"
 ---
 
 Google Ads peut amener des demandes rapidement. Il peut aussi brûler un budget sans rien produire de qualifié. Pour une PME, la question n'est pas « faut-il faire du SEA ? » en absolu. C'est : **êtes-vous prêt**, et **le jeu en vaut-il la chandelle** sur votre marché ?
